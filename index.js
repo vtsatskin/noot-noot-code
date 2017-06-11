@@ -52,11 +52,11 @@ function playMorse () {
   const code = playbackQueue.shift()
 
   if (code === '.') {
-    short.play()
+    setTimeout(() => short.play(), LETTER_SPACE_TIME)
   } else if (code === '-') {
-    long.play()
+    setTimeout(() => long.play(), LETTER_SPACE_TIME)
   } else if (code === ' ') {
-    setTimeout(SPACE_TIME, playMorse)
+    setTimeout(playMorse, SPACE_TIME)
   } else {
     console.log('Playback ended')
   }
