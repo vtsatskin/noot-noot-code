@@ -1,7 +1,33 @@
+const SPACE_TIME = 500 // in ms
+
 const engToMorse = {
   a: '.-',
   b: '-...',
-  c: '-.-.'
+  c: '-.-.',
+  d: '-..',
+  e: '.',
+  f: '..-.',
+  g: '--.',
+  h: '....',
+  i: '..',
+  j: '.---',
+  k: '-.-',
+  l: '.-..',
+  m: '--',
+  n: '-.',
+  o: '---',
+  p: '.--.',
+  q: '--.-',
+  r: '.-.',
+  s: '...',
+  t: '-',
+  u: '..-',
+  v: '...-',
+  w: '.--',
+  x: '-..-',
+  y: '-.--',
+  z: '--..',
+  ' ': ' '
 }
 
 var short = document.querySelector('#short')
@@ -27,10 +53,12 @@ function playMorse () {
     short.play()
   } else if (code === '-') {
     long.play()
+  } else if (code === ' ') {
+    setTimeout(SPACE_TIME, playMorse)
   } else {
     console.log('Playback ended')
   }
 }
 
-playbackQueue = textToMorse('abc')
+playbackQueue = textToMorse('hello world')
 playMorse()
