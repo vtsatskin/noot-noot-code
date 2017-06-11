@@ -1,12 +1,36 @@
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)()
-var myAudio = document.querySelector('#short')
-var source = audioCtx.createMediaElementSource(myAudio)
-var gainNode = audioCtx.createGain()
-source.connect(gainNode)
-gainNode.connect(audioCtx.destination)
+const engToMorse = {
+  a: '.-',
+  b: '-...',
+  c: '-.-.'
+}
 
-myAudio.play()
+var short = document.querySelector('#short')
+var long = document.querySelector('#long')
 
-myAudio.addEventListener('ended', () => {
-  myAudio.play()
-}, true)
+short.addEventListener('ended', playbackEnded, true)
+long.addEventListener('ended', playbackEnded, true)
+
+var playbackQueue = []
+
+function playbackEnded () {
+  playMorse()
+}
+
+function textToMorse (str) {
+  return [].concat(...str.split('').map(x => engToMorse[x].split('')))
+}
+
+function playMorse () {
+  const code = playbackQueue.shift()
+
+  if (code === '.') {
+    short.play()
+  } else if (code === '-') {
+    long.play()
+  } else {
+    console.log('Playback ended')
+  }
+}
+
+playbackQueue = textToMorse('abc')
+playMorse()
