@@ -1,4 +1,6 @@
-const SPACE_TIME = 500 // in ms
+const DOT_TIME = 400 // in ms
+const SPACE_TIME = DOT_TIME * 7 // in ms
+const LETTER_SPACE_TIME = DOT_TIME * 3
 
 const engToMorse = {
   a: '.-',
