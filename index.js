@@ -1,6 +1,12 @@
-const DOT_TIME = 400 // in ms
+// Morse code timings
+// ... = -
+// code space: '1/3 .'
+// letter space: '...'
+// space length: '.......'
+
+const DOT_TIME = 384 / 1.5 // in ms
 const SPACE_TIME = DOT_TIME * 7 // in ms
-const LETTER_SPACE_TIME = DOT_TIME * 3
+const LETTER_SPACE_TIME = 0
 
 const engToMorse = {
   a: '.-',
@@ -38,6 +44,9 @@ var long = document.querySelector('#long')
 short.addEventListener('ended', playbackEnded, true)
 long.addEventListener('ended', playbackEnded, true)
 
+short.playbackRate = 1.5
+long.playbackRate = 1.5
+
 var playbackQueue = []
 
 function playbackEnded () {
@@ -45,7 +54,7 @@ function playbackEnded () {
 }
 
 function textToMorse (str) {
-  return [].concat(...str.split('').map(x => engToMorse[x].split('')))
+  return [].concat(...str.toLowerCase().split('').map(x => engToMorse[x].split('')))
 }
 
 function playMorse () {
